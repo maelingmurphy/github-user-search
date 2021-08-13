@@ -12,7 +12,7 @@ function App() {
   const [userSearchResults, setUserSearchResults] = useState([]);
 
   // Set state boolean variable (isSearchResults) to check if search results are available
-  const [isSearchResults, setIsSearchResults] =useState(false);
+  const [isQuery, setIsQuery] =useState(false);
 
   // Update userInput state based on input field changes
   const handleChange = (event) => {
@@ -20,36 +20,27 @@ function App() {
     setUserInput(userInputValue);
   }
 
-  // Get data from GitHub Search API upon form submit 
-  const getUserData = async(event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
+    console.log("form submitted")
+    // Change value to true once form is submitted in order to trigger SearchResults component display
+    setIsQuery(true);
 
-    try {
-      // Make GET request to API with userInput data
-      const response = await fetch(`https://api.github.com/search/users?q=${userInput}`);
-      // Throw error if response is not successful (not ok)
-      if (!response.ok) {
-        throw new Error(response.status);
-      }
-      // Convert response object to JSON
-      const userSearchData = await response.json();
-      console.log('User search data:', userSearchData);
-      // Save search results to state (userSearchResults)
-      setUserSearchResults(userSearchData);
-      // Change isSearchResults state in order to display SearchResults component
-      setIsSearchResults(true);
-
-    } catch(error) {
-      // Set search response boolean variable to false to display correct message
-      console.log("error: ", error); 
-    }
+    // Get data from API once component renders to the DOM
+    fetch(`https://api.github.com/search/users?q=${userInput}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log("fetch data", data);
+                // Update userSearchResults state with user search results 
+                setUserSearchResults(data);
+            })
   }
 
   return (
     <div>
       <Header />
-      <SearchForm onChange={handleChange} value={userInput} onSubmit={getUserData} />
-      {isSearchResults && <SearchResults />}
+      <SearchForm onChange={handleChange} value={userInput} onSubmit={handleSubmit} />
+      {isQuery && <SearchResults searchResults={userSearchResults}/>}
     </div>
   );
 }
