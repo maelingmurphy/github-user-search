@@ -2,7 +2,9 @@ import React from "react";
 
 function Header() {
     return (
-        <h1>GitHub User Search</h1>
+        <header>
+            <h1>GitHub User Search</h1>
+        </header>      
     );
 }
 
