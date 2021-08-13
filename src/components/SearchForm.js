@@ -5,7 +5,7 @@ function SearchForm({onChange, value, onSubmit}) {
         <div>
             <form onSubmit={onSubmit}>
                 <label htmlFor="username">Enter username</label>
-                <input type="text" id="username" placeholder="Enter username" value={value} onChange={onChange}/>
+                <input type="text" id="username" placeholder="Enter username" value={value} onChange={onChange} required/>
                 <input type="submit" name="submit" value="Search Users"/>
             </form>           
         </div>
