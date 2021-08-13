@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import Header from "./components/Header";
 import SearchForm from "./components/SearchForm";
+import SearchResults from "./components/SearchResults";
 
 function App() {
 
@@ -9,6 +10,9 @@ function App() {
 
   // Set state variable (userSearchResults) to store array of results from API call
   const [userSearchResults, setUserSearchResults] = useState([]);
+
+  // Set state boolean variable (isSearchResults) to check if search results are available
+  const [isSearchResults, setIsSearchResults] =useState(false);
 
   // Update userInput state based on input field changes
   const handleChange = (event) => {
@@ -32,6 +36,8 @@ function App() {
       console.log('User search data:', userSearchData);
       // Save search results to state (userSearchResults)
       setUserSearchResults(userSearchData);
+      // Change isSearchResults state in order to display SearchResults component
+      setIsSearchResults(true);
 
     } catch(error) {
       // Set search response boolean variable to false to display correct message
@@ -43,6 +49,7 @@ function App() {
     <div>
       <Header />
       <SearchForm onChange={handleChange} value={userInput} onSubmit={getUserData} />
+      {isSearchResults && <SearchResults />}
     </div>
   );
 }
