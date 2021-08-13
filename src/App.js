@@ -12,7 +12,10 @@ function App() {
   const [userSearchResults, setUserSearchResults] = useState([]);
 
   // Set state boolean variable (isSearchResults) to check if search results are available
-  const [isQuery, setIsQuery] =useState(false);
+  const [isQuery, setIsQuery] = useState(false);
+
+  // Set state boolean variable for loading status while data is retrieved
+  const [isLoading, setIsLoading] = useState(false);
 
   // Update userInput state based on input field changes
   const handleChange = (event) => {
@@ -26,6 +29,9 @@ function App() {
     // Change value to true once form is submitted in order to trigger SearchResults component display
     setIsQuery(true);
 
+    // Set loading status to true while data is being fetched
+    setIsLoading(true); 
+
     // Get data from API once component renders to the DOM
     fetch(`https://api.github.com/search/users?q=${userInput}`)
             .then(response => response.json())
@@ -33,6 +39,8 @@ function App() {
                 console.log("fetch data", data);
                 // Update userSearchResults state with user search results 
                 setUserSearchResults(data);
+                // Set loading status to false
+                setIsLoading(false);
             })
   }
 
@@ -40,7 +48,7 @@ function App() {
     <div>
       <Header />
       <SearchForm onChange={handleChange} value={userInput} onSubmit={handleSubmit} />
-      {isQuery && <SearchResults searchResults={userSearchResults}/>}
+      {isQuery && <SearchResults searchResults={userSearchResults} isLoading={isLoading} />}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 
-function SearchResults({searchResults}) {
+function SearchResults({searchResults, isLoading}) {
     
     // Write logic that determines what message to post based on search results boolean and number of search results
     let resultsText = "";
@@ -15,7 +15,7 @@ function SearchResults({searchResults}) {
     
     return (
         <section>
-            <p>{resultsText}</p>
+            <p>{isLoading ? "Loading..." : resultsText}</p>
         </section>
     );
 }
