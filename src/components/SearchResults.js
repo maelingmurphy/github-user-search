@@ -20,8 +20,8 @@ function SearchResults({searchResults, isLoading}) {
         usersComponents = searchResults.items.map( (user) => {
             return (
                 <User 
-                    id={user.id}
-                    name={user.login}
+                    key={user.id}
+                    name={user.login} 
                 />
             )
         })
