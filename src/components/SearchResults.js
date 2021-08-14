@@ -22,6 +22,9 @@ function SearchResults({searchResults, isLoading}) {
                 <User 
                     key={user.id}
                     name={user.login} 
+                    avatar={user.avatar_url}
+                    url={user.html_url}
+                    apiUrl={user.url}
                 />
             )
         })
