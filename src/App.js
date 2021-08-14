@@ -23,6 +23,7 @@ function App() {
     setUserInput(userInputValue);
   }
 
+  // Get user data from API upon form submit 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("form submitted")
