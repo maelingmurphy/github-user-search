@@ -12,11 +12,18 @@ function SearchResults({searchResults, isLoading}) {
     } else {
         resultsText = `${searchResults.total_count} results found`;
     }
+
+    // Create array of User components by mapping searchResults data 
     
     return (
         <section>
-            <p>{isLoading ? "Loading..." : resultsText}</p>
+            {isLoading ? (
+                <p>Loading...</p>
+            ) : (
+                <h2>{resultsText}</h2>
+            )}
         </section>
+
     );
 }
 
