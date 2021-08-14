@@ -17,6 +17,9 @@ function App() {
   // Set state boolean variable for loading status while data is retrieved
   const [isLoading, setIsLoading] = useState(false);
 
+  // Set variable for catching fetch errors
+  const [error, setError] = useState("");
+
   // Update userInput state based on input field changes
   const handleChange = (event) => {
     const userInputValue = event.target.value;
@@ -26,7 +29,6 @@ function App() {
   // Get user data from API upon form submit 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("form submitted")
     // Change value to true once form is submitted in order to trigger SearchResults component display
     setIsQuery(true);
 
@@ -35,14 +37,17 @@ function App() {
 
     // Get data from API once component renders to the DOM
     fetch(`https://api.github.com/search/users?q=${userInput}`)
-            .then(response => response.json())
+            .then(response => {
+              if (response.ok) return response.json();
+              throw new Error('Something went wrong while processing this request')
+            })
             .then(data => {
-                console.log("fetch data", data);
                 // Update userSearchResults state with user search results 
                 setUserSearchResults(data);
                 // Set loading status to false
                 setIsLoading(false);
             })
+            .catch(error => setError(error.message));
   }
 
   return (
@@ -50,6 +55,7 @@ function App() {
       <Header />
       <SearchForm onChange={handleChange} value={userInput} onSubmit={handleSubmit} />
       {isQuery && <SearchResults searchResults={userSearchResults} isLoading={isLoading} />}
+      {error && <p>{error}</p>}
     </div>
   );
 }
