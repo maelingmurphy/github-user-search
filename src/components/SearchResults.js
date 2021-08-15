@@ -36,7 +36,7 @@ function SearchResults({searchResults, isLoading}) {
                 <p>Loading...</p>
             ) : (
                 <div>
-                    <h2>{resultsText}</h2>
+                    <p>{resultsText}</p>
                     <div>
                         {usersComponents}
                     </div>                 
