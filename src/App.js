@@ -92,10 +92,10 @@ function App() {
 
   // Fetch user data if pagination request changes (currentPage)
   useEffect(() => {
-    if (currentPage >= 1) {
+    if (isQuery) {
       // Set loading status to true
-    setIsLoading(true);
-    fetch(`https://api.github.com/search/users?q=${userInput}&page=${currentPage}&per_page=20`)
+      setIsLoading(true);
+      fetch(`https://api.github.com/search/users?q=${userInput}&page=${currentPage}&per_page=20`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error('Something went wrong while processing this request')
@@ -109,9 +109,8 @@ function App() {
           setIsLoaded(true);
       })
       .catch(error => setError(error.message)); 
-    }
-    
-  }, [currentPage, userInput]);
+    } 
+  }, [currentPage, userInput, isQuery]);
 
   
 
