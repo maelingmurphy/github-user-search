@@ -92,10 +92,26 @@ function App() {
 
   // Fetch user data if pagination request changes (currentPage)
   useEffect(() => {
-    if (currentPage > 1) {
-      fetchUsers();
-    } 
-  }, [currentPage]);
+    if (currentPage >= 1) {
+      // Set loading status to true
+    setIsLoading(true);
+    fetch(`https://api.github.com/search/users?q=${userInput}&page=${currentPage}&per_page=20`)
+      .then(response => {
+        if (response.ok) return response.json();
+        throw new Error('Something went wrong while processing this request')
+      })
+      .then(data => {
+          // Update userSearchResults state with user search results 
+          setUserSearchResults(data);
+          // Set loading status to false
+          setIsLoading(false);
+          // Set isLoaded status to true to show ReactPaginate component
+          setIsLoaded(true);
+      })
+      .catch(error => setError(error.message)); 
+    }
+    
+  }, [currentPage, userInput]);
 
   
 
@@ -107,7 +123,7 @@ function App() {
       {isQuery && <SearchResults searchResults={userSearchResults} isLoading={isLoading} />}
       {error && <p>{error}</p>}
 
-      {(isLoaded && userSearchResults.totalCount > 1) && (
+      {isLoaded && (
         <ReactPaginate
           previousLabel={"Previous"}
           nextLabel={"Next"}
