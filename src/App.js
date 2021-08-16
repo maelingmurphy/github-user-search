@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import Header from "./components/Header";
 import SearchForm from "./components/SearchForm";
 import SearchResults from "./components/SearchResults";
@@ -26,6 +26,8 @@ function App() {
   // Set variables needed for rendering pagination
   const [pageCount, setPageCount] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
+  const currentPageRef = useRef(1);
+ 
 
   // Update userInput state based on input field changes
   const handleChange = (event) => {
@@ -81,21 +83,39 @@ function App() {
     fetchUsers();
   }
 
-  // const handlePageClick = () => {
-  //   setCurrentPage(currentPage + 1);
-  // }
-
+  // Set current page in response to pagination clicks in ReactPaginate component
   const handlePageClick = (event) => {
     let page = event.selected;
+    // Add 1 since GitHub Search API results are 1-indexed
     setCurrentPage(page + 1);
   }
 
-  // Fetch user data if pagination request changes (currentPage)
+  // Fetch a specific page of user search results if pagination request changes (currentPage state)
   useEffect(() => {
-    if (currentPage > 1) {
-      fetchUsers();
-    } 
-  }, [currentPage]);
+    if (currentPage !== currentPageRef.current) {
+      console.log("currentPage changed!", currentPage);
+      console.log("currentPageRef", currentPageRef.current);
+      // Set loading status to true while data is being fetched
+      setIsLoading(true); 
+      // Get data from API once component renders to the DOM
+      fetch(`https://api.github.com/search/users?q=${userInput}&page=${currentPage}&per_page=20`)
+        .then(response => {
+          if (response.ok) return response.json();
+          throw new Error('Something went wrong while processing this request')
+        })
+        .then(data => {
+            // Update userSearchResults state with user search results 
+            setUserSearchResults(data);
+            // Set loading status to false
+            setIsLoading(false);
+            // Set isLoaded status to true to show ReactPaginate component
+            setIsLoaded(true);
+        })
+        .catch(error => setError(error.message));
+        // Update currentPageRef
+        currentPageRef.current = currentPage;
+    }
+  }, [currentPage, userInput]);
 
   
 
@@ -107,7 +127,8 @@ function App() {
       {isQuery && <SearchResults searchResults={userSearchResults} isLoading={isLoading} />}
       {error && <p>{error}</p>}
 
-      {isLoaded && (
+      {/* Only render ReactPaginate if data is loaded and pageCount is more than 1 */}
+      {(isLoaded && pageCount > 1) && (
         <ReactPaginate
           previousLabel={"Previous"}
           nextLabel={"Next"}
