@@ -42,7 +42,7 @@ function User({name, avatar, url, apiUrl}) {
                     <img className="user__img" src={avatar} alt={`profile of ${name}`}/>
                 </div>
                 <div className="user__content">
-                    <h3 className="user__name"><a className="user__name-link" href={url} target="_blank">{name}</a></h3>
+                    <h3 className="user__name"><a className="user__name-link" href={url} target="_blank" rel="noreferrer">{name}</a></h3>
                     <button className="user__btn" onClick={getUserData}>{buttonText}</button>
                 </div>  
             </div>
