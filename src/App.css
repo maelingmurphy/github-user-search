@@ -34,5 +34,5 @@
 }
 
 .pagination__link--disabled {
-  opacity: 50%;
+  color: #848383;
 }
