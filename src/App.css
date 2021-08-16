@@ -32,3 +32,7 @@
 .pagination__link--active {
   background: #3F1C69;
 }
+
+.pagination__link--disabled {
+  opacity: 30%;
+}
