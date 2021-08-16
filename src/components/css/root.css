@@ -1,4 +1,8 @@
 :root {
     --color-text: #FFF;
     --color-background: #121212;
+    --color-search-btn: #03DAC6;
+    --color-search-btn-hover: #121212;
+    --color-btn-text: #121212;
+    --color-btn-text-hover: #FFF;
 }
