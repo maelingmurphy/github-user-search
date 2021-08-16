@@ -39,7 +39,7 @@ function User({name, avatar, url, apiUrl}) {
         <div className="user">
             <div className="user__wrapper">
                 <div className="user__img-wrapper">
-                    <img className="user__img" src={avatar} alt={`profile image of ${name}`}/>
+                    <img className="user__img" src={avatar} alt={`profile of ${name}`}/>
                 </div>
                 <div className="user__content">
                     <h3 className="user__name"><a href={url}>{name}</a></h3>
