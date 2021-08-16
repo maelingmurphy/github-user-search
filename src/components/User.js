@@ -37,7 +37,7 @@ function User({name, avatar, url, apiUrl}) {
     return (
         <div>
             <div>
-                <h2><a href={url}>{name}</a></h2>
+                <h3><a href={url}>{name}</a></h3>
                 <img src={avatar} alt={`test alt description`}/>
                 <button onClick={getUserData}>{buttonText}</button>
             </div>

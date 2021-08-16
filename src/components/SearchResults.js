@@ -1,5 +1,6 @@
 import React from "react";
 import User from "./User";
+import "./css/SearchResults.css";
 
 function SearchResults({searchResults, isLoading}) {
     
@@ -31,12 +32,12 @@ function SearchResults({searchResults, isLoading}) {
     }
 
     return (
-        <section>
+        <section className="results">
             {isLoading ? (
-                <p>Loading...</p>
+                <p className="results__loading">Loading...</p>
             ) : (
                 <div>
-                    <p>{resultsText}</p>
+                    <h2 className="results__info">{resultsText}</h2>
                     <div>
                         {usersComponents}
                     </div>                 
