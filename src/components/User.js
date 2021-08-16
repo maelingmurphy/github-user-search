@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import "./css/User.css";
 
 function User({name, avatar, url, apiUrl}) {
     // Add variables to state
@@ -35,28 +36,32 @@ function User({name, avatar, url, apiUrl}) {
     let buttonText = buttonState ? "Hide Info" : "See More Info";
 
     return (
-        <div>
-            <div>
-                <h3><a href={url}>{name}</a></h3>
-                <img src={avatar} alt={`test alt description`}/>
-                <button onClick={getUserData}>{buttonText}</button>
-            </div>
-            {buttonState && 
-                <div>
-                    <p>More details</p>
-                    {isUserLoading ? (
-                        <p>Loading...</p>
-                    ) : (
-                        <div>
-                            <p>{userData.name}</p>
-                            <p>{userData.bio}</p>
-                            <p>Followers <span>{userData.followers}</span></p>
-                            <p>Public Repos <span>{userData.public_repos}</span></p>
-                            <p>Stars <span>{starCount}</span></p>
-                        </div>
-                    )}       
+        <div className="user">
+            <div className="user__wrapper">
+                <div className="user__img-wrapper">
+                    <img className="user__img" src={avatar} alt={`profile image of ${name}`}/>
                 </div>
-            }
+                <div className="user__content">
+                    <h3 className="user__name"><a href={url}>{name}</a></h3>
+                    <button className="user__btn" onClick={getUserData}>{buttonText}</button>
+                    {buttonState && 
+                        <div className="user__more-info">
+                            <p>More details</p>
+                            {isUserLoading ? (
+                                <p>Loading...</p>
+                            ) : (
+                                <div>
+                                    <p>{userData.name}</p>
+                                    <p>{userData.bio}</p>
+                                    <p>Followers <span>{userData.followers}</span></p>
+                                    <p>Public Repos <span>{userData.public_repos}</span></p>
+                                    <p>Stars <span>{starCount}</span></p>
+                                </div>
+                            )}       
+                        </div>
+                    }
+                </div>   
+            </div>
         </div>
     );
 }
