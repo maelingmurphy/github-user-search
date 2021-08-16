@@ -9,6 +9,7 @@
 .pagination {
   display: flex;
   list-style: none;
+  margin-top: 2em;
 }
 
 .pagination__page {
