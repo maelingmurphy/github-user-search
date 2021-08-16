@@ -127,7 +127,8 @@ function App() {
       {isQuery && <SearchResults searchResults={userSearchResults} isLoading={isLoading} />}
       {error && <p>{error}</p>}
 
-      {isLoaded && (
+      {/* Only render ReactPaginate if data is loaded and pageCount is more than 1 */}
+      {(isLoaded && pageCount > 1) && (
         <ReactPaginate
           previousLabel={"Previous"}
           nextLabel={"Next"}
