@@ -1,4 +1,4 @@
-/* Import Google Fonts */
+/* Import Google Fonts and CSS variables */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Work+Sans:wght@700&display=swap');
 @import "./components/css/root.css";
 

@@ -58,8 +58,7 @@ function User({name, avatar, url, apiUrl}) {
                                 <p className="user__stats-label">Followers: <span className="user__stat">{userData.followers}</span></p>
                                 <p className="user__stats-label">Public Repos: <span className="user__stat">{userData.public_repos}</span></p>
                                 <p className="user__stats-label">Stars: <span className="user__stat">{starCount}</span></p>
-                            </div>
-                            
+                            </div>           
                         </div>
                     )}       
                 </div>

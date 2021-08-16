@@ -39,7 +39,6 @@ function App() {
   const fetchUsers = () => {
     // Set loading status to true while data is being fetched
     setIsLoading(true); 
-    console.log("current page of results", currentPage);
 
     // Get data from API once component renders to the DOM
     fetch(`https://api.github.com/search/users?q=${userInput}&page=${currentPage}&per_page=20`)
@@ -60,7 +59,6 @@ function App() {
           }
           let totalPages = Math.ceil(totalResults/20.0);
         
-          console.log("total pages", totalPages);
           setPageCount(totalPages);
           // Set loading status to false
           setIsLoading(false);
@@ -93,8 +91,6 @@ function App() {
   // Fetch a specific page of user search results if pagination request changes (currentPage state)
   useEffect(() => {
     if (currentPage !== currentPageRef.current) {
-      console.log("currentPage changed!", currentPage);
-      console.log("currentPageRef", currentPageRef.current);
       // Set loading status to true while data is being fetched
       setIsLoading(true); 
       // Get data from API once component renders to the DOM
@@ -116,9 +112,6 @@ function App() {
         currentPageRef.current = currentPage;
     }
   }, [currentPage, userInput]);
-
-  
-
 
   return (
     <div className="container">

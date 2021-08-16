@@ -4,7 +4,7 @@ import "./css/SearchResults.css";
 
 function SearchResults({searchResults, isLoading}) {
     
-    // Write logic that determines what message to post based on search results boolean and number of search results
+    // Determine what message to post based on search results boolean and number of search results
     let resultsText = "";
 
     if (searchResults.total_count === 0) {
