@@ -33,7 +33,7 @@ function User({name, avatar, url, apiUrl}) {
             })
     }
 
-    let buttonText = buttonState ? "Hide Info" : "See More Info";
+    let buttonText = buttonState ? "Hide Info" : "Click for More Info";
 
     return (
         <div className="user">
@@ -42,26 +42,28 @@ function User({name, avatar, url, apiUrl}) {
                     <img className="user__img" src={avatar} alt={`profile of ${name}`}/>
                 </div>
                 <div className="user__content">
-                    <h3 className="user__name"><a href={url}>{name}</a></h3>
+                    <h3 className="user__name"><a className="user__name-link" href={url}>{name}</a></h3>
                     <button className="user__btn" onClick={getUserData}>{buttonText}</button>
-                    {buttonState && 
-                        <div className="user__more-info">
-                            <p>More details</p>
-                            {isUserLoading ? (
-                                <p>Loading...</p>
-                            ) : (
-                                <div>
-                                    <p>{userData.name}</p>
-                                    <p>{userData.bio}</p>
-                                    <p>Followers <span>{userData.followers}</span></p>
-                                    <p>Public Repos <span>{userData.public_repos}</span></p>
-                                    <p>Stars <span>{starCount}</span></p>
-                                </div>
-                            )}       
-                        </div>
-                    }
-                </div>   
+                </div>  
             </div>
+            {buttonState && 
+                <div className="user__more-info">
+                    {isUserLoading ? (
+                        <p>Loading...</p>
+                    ) : (
+                        <div>
+                            <h4 className="user__profile-name">{userData.name}</h4>
+                            <p class="user__bio">{userData.bio}</p>
+                            <div className="user__stats">
+                                <p className="user__stats-label">Followers: <span className="user__stat">{userData.followers}</span></p>
+                                <p className="user__stats-label">Public Repos: <span className="user__stat">{userData.public_repos}</span></p>
+                                <p className="user__stats-label">Stars: <span className="user__stat">{starCount}</span></p>
+                            </div>
+                            
+                        </div>
+                    )}       
+                </div>
+            } 
         </div>
     );
 }
