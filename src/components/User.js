@@ -20,7 +20,10 @@ function User({name, avatar, url, apiUrl}) {
             })
         // Get star count from repos endpoint
         fetch(`${apiUrl}/repos`)
-            .then(response => response.json())
+            .then(response => {
+                if (response.ok) return response.json();
+                throw new Error('Something went wrong while processing this request');
+            })
             .then(repoData => {
                 // Create variable to hold repo star counts
                 let count = 0;
@@ -31,6 +34,7 @@ function User({name, avatar, url, apiUrl}) {
                 setStarCount(count);
                 setIsUserLoading(false);
             })
+            .catch(error => alert(error));
     }
 
     let buttonText = buttonState ? "Hide Info" : "Click for More Info";
