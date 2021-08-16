@@ -136,7 +136,7 @@ function App() {
           pageCount={pageCount}
           onPageChange={handlePageClick}
           marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
+          pageRangeDisplayed={2}
           containerClassName={"pagination"}
           pageLinkClassName={"pagination__page"}
           previousLinkClassName={"pagination__link"}
