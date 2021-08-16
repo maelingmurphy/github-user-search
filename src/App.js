@@ -121,7 +121,7 @@ function App() {
 
 
   return (
-    <div>
+    <div className="container">
       <Header />
       <SearchForm onChange={handleChange} value={userInput} onSubmit={handleSubmit} />
       {isQuery && <SearchResults searchResults={userSearchResults} isLoading={isLoading} />}

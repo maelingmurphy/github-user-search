@@ -1,5 +1,10 @@
-/* Custom ReactPaginate Styling */
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+  /* border: 1px solid red; */
+}
 
+/* Custom ReactPaginate component Styling */
 .pagination {
   display: flex;
   list-style: none;
