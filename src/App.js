@@ -128,7 +128,7 @@ function App() {
       {error && <p>{error}</p>}
 
       {/* Only render ReactPaginate if data is loaded and pageCount is more than 1 */}
-      {(!isLoading && isLoaded && pageCount > 1) && (
+      {(isLoaded && pageCount > 1) && (
         <ReactPaginate
           previousLabel={"Previous"}
           nextLabel={"Next"}
