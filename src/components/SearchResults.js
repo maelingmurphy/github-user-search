@@ -9,7 +9,7 @@ function SearchResults({searchResults, isLoading}) {
 
     if (searchResults.total_count === 0) {
         resultsText = "No results found";
-    } else if (resultsText === 1) {
+    } else if (searchResults.total_count === 1) {
         resultsText = "1 result found";
     } else {
         resultsText = `${searchResults.total_count} results found`;
